@@ -1,11 +1,9 @@
 require "rails_helper"
 
-RSpec.feature "Users signin" do
+RSpec.feature "Users signout" do
   before do
     @user = User.create!(email: "said@example.com", password: "password")
-  end
 
-  scenario "with valid credentials" do
     visit '/'
 
     click_link "Sign in"
@@ -14,9 +12,13 @@ RSpec.feature "Users signin" do
     fill_in "Password", with: "@user.password"
 
     click_button "Log in"
+  end
 
-    expect(page).to have_content("You have signed up successfully.")
-    expect(page).to have_content("#{@user.email}")
+  scenario do
+    visit '/'
 
+    click_link "Sign out"
+
+    expect(page).to have_content("Signed out successfully.")
   end
 end
