@@ -31,14 +31,14 @@ cucumber_options = {
   # notification: false
 }
 
-# guard "cucumber", cucumber_options do
-#   watch(%r{^features/.+\.feature$})
-#   watch(%r{^features/support/.+$}) { "features" }
-#
-#   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
-#     Dir[File.join("**/#{m[1]}.feature")][0] || "features"
-#   end
-# end
+guard "cucumber", cucumber_options do
+  watch(%r{^features/.+\.feature$})
+  watch(%r{^features/support/.+$}) { "features" }
+
+  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
+    Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+  end
+end
 
 # Note: The cmd option is now required due to the increasing number of ways
 #       rspec may be run, below are examples of the most common uses.
@@ -49,7 +49,8 @@ cucumber_options = {
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: "bin/rspec" do
+# guard :rspec, cmd: "bin/rspec" do
+guard :rspec, cmd: "bundle exec rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
