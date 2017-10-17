@@ -1,22 +1,21 @@
 require "rails_helper"
 
-RSpec.feature "Users signin" do
+RSpec.feature "Hiding signin link" do
   before do
     @user = User.create!(email: "said@example.com", password: "password")
   end
 
-  scenario "with valid credentials" do
+  scenario "upon successful signin" do
     visit '/'
 
-    click_link "Sign out"
-
+    click_link "Sign in"
     fill_in "Email", with: "@user.email"
     fill_in "Password", with: "@user.password"
 
     click_button "Log in"
 
-    expect(page).to have_content("You have signed up successfully.")
-    expect(page).to have_content("#{@user.email}")
-
+    expect(page).to have_link("Sign out")
+    expect(page).not_to have_link("Sign in")
+    expect(page).not_to have_link("Sign up")
   end
 end
