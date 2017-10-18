@@ -2,16 +2,20 @@ require "rails_helper"
 
 RSpec.feature "Listing Exercises" do
   before do
-    @user = User.create!(email: "said@example.com", password: "password")
+    @user = User.create!(email: "said@exercisexample.com", password: "password")
     login_as(@user)
 
-    @e1 = @user.exercises.create(duration_in_min: 20,
+    @exercise1 = @user.exercises.create(duration_in_min: 20,
                                   workout: "My ABS workout schedule",
                                   workout_date: Date.today)
 
-    @e2 = @user.exercises.create(duration_in_min: 55,
-                                  workout: "Pree Up",
+    @exercise2 = @user.exercises.create(duration_in_min: 55,
+                                  workout: "Press Up",
                                   workout_date: 2.days.ago)
+
+    @exercise3 = @user.exercises.create(duration_in_min: 40,
+                                  workout: "Run on the hill",
+                                  workout_date: 12.days.ago)
 
 
   end
@@ -21,17 +25,26 @@ RSpec.feature "Listing Exercises" do
 
     click_link "My Lounge"
 
-    expect(page).to have_content(@e1.duration_in_min)
-    expect(page).to have_content(@e1.workout)
-    expect(page).to have_content(@e1.workout_date)
+    expect(page).to have_content(@exercise1.duration_in_min)
+    expect(page).to have_content(@exercise1.workout)
+    expect(page).to have_content(@exercise1.workout_date)
 
-    expect(page).to have_content(@e2.duration_in_min)
-    expect(page).to have_content(@e2.workout)
-    expect(page).to have_content(@e2.workout_date)
+    expect(page).to have_content(@exercise2.duration_in_min)
+    expect(page).to have_content(@exercise2.workout)
+    expect(page).to have_content(@exercise2.workout_date)
 
-    # expect(page).not_to have_content(@e3.duration_in_min)
-    # expect(page).not_to have_content(@e3.workout)
-    # expect(page).not_to have_content(@e3.workout_date)
+    expect(page).not_to have_content(@exercise3.duration_in_min)
+    expect(page).not_to have_content(@exercise3.workout)
+    expect(page).not_to have_content(@exercise3.workout_date)
+  end
 
+  scenario "shows no exercises if none created" do
+    @user.exercises.delete_all
+
+    visit '/'
+
+    click_link 'My Lounge'
+
+    expect(page).to have_content('No Workouts Yet')
   end
 end
