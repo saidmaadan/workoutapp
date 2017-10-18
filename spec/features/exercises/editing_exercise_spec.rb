@@ -27,5 +27,4 @@ RSpec.feature "Editing Exercise" do
     expect(page).to have_content(75)
     expect(page).not_to have_content(65)
   end
-
 end

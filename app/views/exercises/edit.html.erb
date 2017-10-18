@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <h1 class="text-center">Editing Exercise for <%= current_user.full_name %></h1>
+
+      <%= render 'form' %>
+      <%= link_to 'Back', user_exercises_path(current_user), class: 'btn btn-primary', id: "back-btn"  %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

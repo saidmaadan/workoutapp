@@ -1,11 +1,12 @@
 class ExercisesController < ApplicationController
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   def index
     @exercises = current_user.exercises
   end
 
   def show
-    @exercise = current_user.exercises.find(params[:id])
+
   end
 
   def new
@@ -23,8 +24,25 @@ class ExercisesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @exercise.update(exercise_params)
+      flash[:notice] = "Exercise has been updated"
+      redirect_to [current_user, @exercise]
+    else
+      flash[:alert] = "Exercise has not been updated"
+      render :edit
+    end
+  end
+
   private
     def exercise_params
       params.require(:exercise).permit(:duration_in_min, :workout, :workout_date, :user_id)
+    end
+
+    def set_exercise
+      @exercise = current_user.exercises.find(params[:id])
     end
 end
