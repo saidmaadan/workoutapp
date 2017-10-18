@@ -8,5 +8,19 @@
       <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </p>
   </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <h2>List of Members</h2>
+    </div>
+  </div>
+  <div class="row">
+    <% @athletes.each do |a| %>
+      <div class="col-md-10 card card-body ">
+        <%= a.full_name %>
+      </div>member
+    <% end %>
+  </div>
 </div>
