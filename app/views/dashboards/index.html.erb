@@ -18,9 +18,13 @@
     </div>
   </div>
   <div class="row">
-    <% @athletes.each do |a| %>
+    <% @athletes.each do |athlete| %>
       <div class="col-md-10 card card-body member ">
-        <%= a.full_name %>
+        <%= athlete.full_name %>
+        <% if current_user %>
+          <%= link_to "Follow", friendships_path(friend_id: athlete.id),
+              method: :post, class: 'btn btn-outline-success' unless current_user.follows_or_same?(athlete) %>
+        <% end %>
       </div>
     <% end %>
   </div>
