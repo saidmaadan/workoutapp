@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Hiding signin link" do
   before do
-    @user = User.create!(email: "said@example.com", password: "password")
+    @user = User.create!(first_name: "Said", last_name: "Fola", email: "said@example.com", password: "password")
     # @john = User.create!(first_name: "John", last_name: "Doe", email: "john@example.com",
     #                      password: "password")
   end
