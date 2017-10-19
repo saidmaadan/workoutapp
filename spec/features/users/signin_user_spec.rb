@@ -9,11 +9,16 @@ RSpec.feature "Users signin" do
     visit "/"
 
     click_link "Sign in"
+    # fill_in "First name", with: "Said"
+    # fill_in "Last name", with: "Fola"
     fill_in "Email", with: @user.email
     fill_in "Password",  with: @user.password
     click_button "Log in"
 
     expect(page).to have_content("Signed in successfully.")
     expect(page).to have_content("#{@user.email}")
+
+    # visit '/'
+    # expect(page).to have_content("Said Fola")
   end
 end
