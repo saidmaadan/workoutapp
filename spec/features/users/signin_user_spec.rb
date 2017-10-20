@@ -9,8 +9,6 @@ RSpec.feature "Users signin" do
     visit "/"
 
     click_link "Sign in"
-    # fill_in "First name", with: "Said"
-    # fill_in "Last name", with: "Fola"
     fill_in "Email", with: @user.email
     fill_in "Password",  with: @user.password
     click_button "Log in"

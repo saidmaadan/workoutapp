@@ -14,6 +14,11 @@ RSpec.feature "Signup Users" do
     click_button "Sign up"
     expect(page).to have_content("You have signed up successfully.")
 
+    user = User.last
+    room = user.room
+    room_name = user.full_name.split.join('-')
+    expect(room.name).to eq(room_name)
+
     visit '/'
     expect(page).to have_content("Said Fola")
   end
@@ -28,6 +33,5 @@ RSpec.feature "Signup Users" do
 
     expect(page).to have_content("First name can't be blank")
     expect(page).to have_content("Last name can't be blank")
-    #expect(page).to have_content("You have not signed up successfully")
   end
 end
